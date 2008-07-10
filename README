@@ -1,0 +1,16 @@
+This is a library for normalizing JavaScript key codes across browsers.  It's based on the article "JavaScript Madness: Keyboard Events" by Jan Wolter:
+
+http://unixpapa.com/js/key.html
+
+The normalized keycodes it generates obey the following rules:
+
+- For alphabetic characters, the ASCII code of the uppercase version
+- For codes that are identical across all browsers (this includes all modifiers, esc, delete, arrows, etc.), the common keycode
+- For numeric keypad keys, the value returned by numkey(). (Usually 96 + the number)
+- For symbols, the ASCII code of the character that appears when shift is not held down, EXCEPT for ' and ", which returns 34 (the ASCII code of the double quote) because 39 (single quote) conflicts with the code returned for right-arrow.
+
+This library works with key objects, which are { Int code, bool shift, bool alt, bool ctrl } JavaScript objects that record the key code along with any modifiers pressed.  translate_event() returns one of these; hot_key() takes one of these and returns a string suitable for the JQuery HotKey plugin or Binny V A's shortcut.js library.
+
+Unfortunately this library has not had much testing: it's been used on IE6 and both UNIX and Windows Firefox, but no Opera or Safari.  I'm basically trusting Jan's article (which has been updated since this code was written; I have not yet taken the updates into account).  Also, the project this was developed for was built on JQuery, and while there are no explicit dependencies, the event objects it takes in may depend on cross-browser normalizations it provides.
+
+Patches are welcome; that's what GitHub is for.  I'm hoping to return to this and make sure it works robustly in all browsers.  The intent is for this to be completely cross-browser and independent of all external libraries.
