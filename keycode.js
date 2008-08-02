@@ -11,7 +11,8 @@ var modifiers = ['ctrl', 'alt', 'shift'],
         63: 47,     // ? -> /
         96: 192,    // ` -> ~
         124: 92,    // | -> \
-        39: 34,     // ' -> "
+        39: 222,    // ' -> 222
+        34: 222,    // " -> 222
         33: 49,     // ! -> 1
         64: 50,     // @ -> 2
         35: 51,     // # -> 3
@@ -48,11 +49,10 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         192: 126, // `~
         219: 91, // {[
         220: 92, // \|
-        221: 93, // }]
-        222: 34  // '"
+        221: 93 // }]
     };
 } else if(window.opera && navigator.platform.indexOf('Win') != -1) { // Windows Opera
-    key_map = {};
+    key_map = {39: 222};
 } else if(window.opera ||                           // Other Opera
           navigator.vendor.indexOf('KDE') != -1 ||  // Konqueror
           navigator.vendor.indexOf('iCab') != -1) { // iCab
@@ -85,7 +85,8 @@ var key_names = {
     45: 'INSERT',
     46: 'DELETE',
     27: 'ESCAPE',
-    19: 'PAUSE'
+    19: 'PAUSE',
+    222: "'"
 };
 function fn_name(code) {
     if(code >= 112 && code <= 123) return 'F' + (code - 111);
