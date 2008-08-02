@@ -7,7 +7,7 @@ The normalized keycodes it generates obey the following rules:
 - For alphabetic characters, the ASCII code of the uppercase version
 - For codes that are identical across all browsers (this includes all modifiers, esc, delete, arrows, etc.), the common keycode
 - For numeric keypad keys, the value returned by numkey(). (Usually 96 + the number)
-- For symbols, the ASCII code of the character that appears when shift is not held down, EXCEPT for ' and ", which returns 34 (the ASCII code of the double quote) because 39 (single quote) conflicts with the code returned for right-arrow.
+- For symbols, the ASCII code of the character that appears when shift is not held down, EXCEPT for '/" => " (conflicts with right-arrow) and `/~ => ~ (conflicts with Num0).
 
 This library works with key objects, which are { Int code, bool shift, bool alt, bool ctrl } JavaScript objects that record the key code along with any modifiers pressed.  translate_event() returns one of these; hot_key() takes one of these and returns a string suitable for the JQuery HotKey plugin or Binny V A's shortcut.js library.
 

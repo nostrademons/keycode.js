@@ -1,7 +1,4 @@
 (function() {
-/**
- * @has_test
- */
 
 var modifiers = ['ctrl', 'alt', 'shift'],
     keymap = {},
@@ -12,7 +9,7 @@ var modifiers = ['ctrl', 'alt', 'shift'],
         95: 45,     // _ -> -
         62: 46,     // > -> .
         63: 47,     // ? -> /
-        126: 96,    // ~ -> `
+        96: 192,    // ` -> ~
         124: 92,    // | -> \
         39: 34,     // ' -> "
         33: 49,     // ! -> 1
@@ -48,12 +45,12 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         189: 45, // -_ in IE
         190: 46, // .>
         191: 47, // /?
-        192: 96, // `~
+        192: 126, // `~
         220: 92, // \|
         222: 34  // '"
     };
 } else if(window.opera && navigator.platform.indexOf('Win') != -1) { // Windows Opera
-    key_map = { 126: 96 };
+    key_map = {};
 } else if(window.opera ||                           // Other Opera
           navigator.vendor.indexOf('KDE') != -1 ||  // Konqueror
           navigator.vendor.indexOf('iCab') != -1) { // iCab
