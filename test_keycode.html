@@ -70,6 +70,7 @@
         document.getElementById('codePrintout').innerHTML = 'Current code: ' + k.translate_event(e).code;
         document.getElementById('raw_keycode').innerHTML = e.which || e.keyCode;
         KeyCode.key_down(e);
+        e.preventDefault();
         return false;
     };
     document.onkeyup = KeyCode.key_up;
