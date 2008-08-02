@@ -44,7 +44,7 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         188: 44, // ,<
         109: 45, // -_ in Mozilla
         189: 45, // -_ in IE
-        190: 46, // .>
+        190: 62, // .>
         191: 47, // /?
         192: 126, // `~
         219: 91, // {[
@@ -52,7 +52,7 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         221: 93 // }]
     };
 } else if(window.opera && navigator.platform.indexOf('Win') != -1) { // Windows Opera
-    key_map = {39: 222};
+    key_map = { 39: 222, 46: 62 };
 } else if(window.opera ||                           // Other Opera
           navigator.vendor.indexOf('KDE') != -1 ||  // Konqueror
           navigator.vendor.indexOf('iCab') != -1) { // iCab
