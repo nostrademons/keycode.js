@@ -1,21 +1,19 @@
 <html>
 <head>
     <title>Keycode library test</title>
-<!-- BEGIN SCRIPT TAGS -->
-<script src = "../../gameclay/editor/js/keycode.js"></script>
-<!-- END SCRIPT TAGS -->
-    <script src = "../../gameclay/editor/js/jquery.js"></script>
+    <script src = "keycode.js"></script>
+    <script src = "jquery.js"></script>
     <script type = "text/javascript" src = "jsunit/app/jsUnitCore.js"></script>
 </head>
 <body>
     <h1>Keycode library test</h1>
-    <div id = "keyPrintout">Current key:</div>
+    <div id = "keyPrintout">Current key: </div>
     <div>X is down: <span id = "x_down">false</span></div>
     <div>Shift-X is down: <span id = "shift_x_down">false</span></div>
     <div>Shift-C is down: <span id = "shift_c_down">false</span></div>
     <div>Ctrl-A is down: <span id = "ctrl_a_down">false</span></div>
     <script type = "text/javascript">
-        // Here be all jsUnit test cases...
+    // Here be all jsUnit test cases...
     var k = KeyCode;
     function simple_key(code) { return k.hot_key({ code: code }); };
     function test_lower_a() { assertEquals('A', simple_key(k.key('a'))); };
@@ -69,15 +67,21 @@
         show_is_key_down('shift_c', KeyCode.key('c'), false, false, true);
         show_is_key_down('ctrl_a', KeyCode.key('a'), true, false, false);
     };
+
+    document.onkeydown = function(e) {
+        var k = KeyCode;
+        $('#keyPrintout').text('Current key: ' + k.hot_key(k.translate_event(e)));
+        KeyCode.key_down(e);
+    };
+    document.onkeyup = KeyCode.key_up;
+
     $(document).keydown(function(e) { 
         var k = KeyCode;
-        $('#keyPrintout').text(k.hot_key(k.translate_event(e)));
+        $('#jqueryPrintout').text('Current key: ' + k.hot_key(k.translate_event(e)));
         KeyCode.key_down(e);
     }).keyup(KeyCode.key_up);
+
     window.setInterval(update_key_downs, 500);
-    for(var i = 0; i < types.length; ++i) { 
-        $(document)[types[i]](show_event(types[i]));
-    }
 </script>
 </body>
 </html>
