@@ -2,7 +2,6 @@
 <head>
     <title>Keycode library test</title>
     <script src = "keycode.js"></script>
-    <script src = "jquery.js"></script>
     <script type = "text/javascript" src = "jsunit/app/jsUnitCore.js"></script>
 </head>
 <body>
@@ -49,17 +48,17 @@
             for(var i = 0; i < fields.length; ++i) {
                 lines.push('<b>' + fields[i] + '</b>: ' + e[fields[i]] + '<br />');
             }
-            $('#' + type).html(lines.join('\n'));
+            document.getElementByI(type).innerHTML = lines.join('\n');
             return false;
         }
     };
     function show_is_key_down(id, code, ctrl, alt, shift) {
-        $('#' + id + '_down').text(KeyCode.is_down({
+        document.getElementById(id + '_down').innerHTML = KeyCode.is_down({
             code: code,
             ctrl: ctrl,
             alt: alt,
             shift: shift
-        }));
+        });
     };
     function update_key_downs() {
         show_is_key_down('x', KeyCode.key('x'), false, false, false);
@@ -70,16 +69,10 @@
 
     document.onkeydown = function(e) {
         var k = KeyCode;
-        $('#keyPrintout').text('Current key: ' + k.hot_key(k.translate_event(e)));
+        document.getElementById('keyPrintout').innerHTML = 'Current key: ' + k.hot_key(k.translate_event(e));
         KeyCode.key_down(e);
     };
     document.onkeyup = KeyCode.key_up;
-
-    $(document).keydown(function(e) { 
-        var k = KeyCode;
-        $('#jqueryPrintout').text('Current key: ' + k.hot_key(k.translate_event(e)));
-        KeyCode.key_down(e);
-    }).keyup(KeyCode.key_up);
 
     window.setInterval(update_key_downs, 500);
 </script>
