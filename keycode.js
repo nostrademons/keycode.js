@@ -46,7 +46,9 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         190: 46, // .>
         191: 47, // /?
         192: 126, // `~
+        219: 91, // {[
         220: 92, // \|
+        221: 93, // }]
         222: 34  // '"
     };
 } else if(window.opera && navigator.platform.indexOf('Win') != -1) { // Windows Opera
