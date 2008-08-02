@@ -11,6 +11,12 @@ The normalized keycodes it generates obey the following rules:
 
 This library works with key objects, which are { Int code, bool shift, bool alt, bool ctrl } JavaScript objects that record the key code along with any modifiers pressed.  translate_event() returns one of these; hot_key() takes one of these and returns a string suitable for the JQuery HotKey plugin or Binny V A's shortcut.js library.
 
+So far, I've tested it on:
+
+- Firefox 2.0.0.12 for Linux
+- Firefox 2.0.0.16 for Windows
+- IE 6.0 for Windows
+
 Unfortunately this library has not had much testing: it's been used on IE6 and both UNIX and Windows Firefox, but no Opera or Safari.  I'm basically trusting Jan's article (which has been updated since this code was written; I have not yet taken the updates into account).  Also, the project this was developed for was built on JQuery, and while there are no explicit dependencies, the event objects it takes in may depend on cross-browser normalizations it provides.
 
 Patches are welcome; that's what GitHub is for.  I'm hoping to return to this and make sure it works robustly in all browsers.  The intent is for this to be completely cross-browser and independent of all external libraries.

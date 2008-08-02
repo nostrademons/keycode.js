@@ -11,6 +11,7 @@
     <div>Shift-X is down: <span id = "shift_x_down">false</span></div>
     <div>Shift-C is down: <span id = "shift_c_down">false</span></div>
     <div>Ctrl-A is down: <span id = "ctrl_a_down">false</span></div>
+    <div>Raw keycode: <span id = "raw_keycode"></span></div>
     <script type = "text/javascript">
     // Here be all jsUnit test cases...
     var k = KeyCode;
@@ -64,7 +65,9 @@
     document.onkeydown = function(e) {
         var k = KeyCode;
         document.getElementById('keyPrintout').innerHTML = 'Current key: ' + k.hot_key(k.translate_event(e));
+        document.getElementById('raw_keycode').innerHTML = e.which || window.event.keyCode;
         KeyCode.key_down(e);
+        return false;
     };
     document.onkeyup = KeyCode.key_up;
 
