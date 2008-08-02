@@ -7,6 +7,7 @@
 <body>
     <h1>Keycode library test</h1>
     <div id = "keyPrintout">Current key: </div>
+    <div id = "codePrintout">Current code: </div>
     <div>X is down: <span id = "x_down">false</span></div>
     <div>Shift-X is down: <span id = "shift_x_down">false</span></div>
     <div>Shift-C is down: <span id = "shift_c_down">false</span></div>
@@ -63,9 +64,11 @@
     };
 
     document.onkeydown = function(e) {
+        e = e || window.event
         var k = KeyCode;
         document.getElementById('keyPrintout').innerHTML = 'Current key: ' + k.hot_key(k.translate_event(e));
-        document.getElementById('raw_keycode').innerHTML = e.which || window.event.keyCode;
+        document.getElementById('codePrintout').innerHTML = 'Current code: ' + k.translate_event(e).code;
+        document.getElementById('raw_keycode').innerHTML = e.which || e.keyCode;
         KeyCode.key_down(e);
         return false;
     };
