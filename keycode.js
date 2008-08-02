@@ -154,8 +154,10 @@ var KeyCode = window.KeyCode = {
      * { int code; boolean shift, boolean alt, boolean ctrl }
      */
     translate_event: function(e) {
+        e = e || window.event;
+        var code = e.which || e.keyCode;
         return {
-            code: KeyCode.translate_key_code(e.keyCode),
+            code: KeyCode.translate_key_code(code),
             shift: e.shiftKey,
             alt: e.altKey,
             ctrl: e.ctrlKey
