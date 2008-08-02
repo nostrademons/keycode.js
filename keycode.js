@@ -42,8 +42,8 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         186: 59, // ;: in IE
         187: 61, // =+ in IE
         188: 44, // ,<
-        109: 45, // -_ in Mozilla
-        189: 45, // -_ in IE
+        109: 95, // -_ in Mozilla
+        189: 95, // -_ in IE
         190: 62, // .>
         191: 47, // /?
         192: 126, // `~
@@ -52,7 +52,11 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         221: 93 // }]
     };
 } else if(window.opera && navigator.platform.indexOf('Win') != -1) { // Windows Opera
-    key_map = { 39: 222, 46: 62 };
+    key_map = { 
+        39: 222, // '" => 222
+        45: 95,  // -_
+        46: 62   // .>
+    };
 } else if(window.opera ||                           // Other Opera
           navigator.vendor.indexOf('KDE') != -1 ||  // Konqueror
           navigator.vendor.indexOf('iCab') != -1) { // iCab
