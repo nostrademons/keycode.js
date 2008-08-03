@@ -37,9 +37,9 @@ function capitalize(str) {
 var is_gecko = navigator.userAgent.indexOf('Gecko') != -1,
     is_ie = navigator.userAgent.indexOf('MSIE') != -1,
     is_windows = navigator.platform.indexOf('Win') != -1,
-    is_opera = window.opera,
-    is_konqueror = navigator.vendor.indexOf('KDE') != -1,
-    is_icab = navigator.vendor.indexOf('iCab') != -1;
+    is_opera = window.opera && window.opera.version() < '9.5',
+    is_konqueror = navigator.vendor && navigator.vendor.indexOf('KDE') != -1,
+    is_icab = navigator.vendor && navigator.vendor.indexOf('iCab') != -1;
 
 var GECKO_IE_KEYMAP = {
     186: 59, // ;: in IE
@@ -55,21 +55,10 @@ var GECKO_IE_KEYMAP = {
     221: 93 // }]
 };
 
-var OPERA_KEYMAP = {
-    188: 44,    // ,<
-    190: 62,    // .>
-    191: 47,    // /?
-    192: 126,   // `~
-    219: 91,    // {[
-    220: 92,    // |\
-    221: 93     // }]
-};
+var OPERA_KEYMAP = {};
 
 // Browser detection taken from quirksmode.org
-if(is_gecko || is_ie) {  
-    // These two are close enough that we can use the same map for both
-    KEY_MAP = GECKO_IE_KEYMAP;
-} else if(is_opera && is_windows) {
+if(is_opera && is_windows) {
     KEY_MAP = OPERA_KEYMAP;
 } else if(is_opera || is_konqueror || is_icab) {
     var unshift = [33, 64, 35, 36, 37, 94, 38, 42, 40, 41, 
@@ -78,6 +67,11 @@ if(is_gecko || is_ie) {
     for(var i = 0; i < unshift.length; ++i) {
         KEY_MAP[unshift[i]] = shifted_symbols[unshift[i]];
     }
+} else {
+    // IE and Gecko are close enough that we can use the same map for both,
+    // and the rest of the world (eg. Opera 9.50) seems to be standardizing
+    // on them
+    KEY_MAP = GECKO_IE_KEYMAP;
 }
 
 if(is_konqueror) {
