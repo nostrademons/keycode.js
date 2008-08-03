@@ -16,7 +16,11 @@ So far, I've tested it on:
 - Firefox 2.0.0.12 for Linux
 - Firefox 2.0.0.16 for Windows
 - IE 6.0 for Windows
+- Opera 9.5.1 for Windows
+- Safari 3.0 for Windows
 
-Unfortunately this library has not had much testing: it's been used on IE6 and both UNIX and Windows Firefox, but no Opera or Safari.  I'm basically trusting Jan's article (which has been updated since this code was written; I have not yet taken the updates into account).  Also, the project this was developed for was built on JQuery, and while there are no explicit dependencies, the event objects it takes in may depend on cross-browser normalizations it provides.
+Known bugs include:
+- There's no way to generate a keycode for the PrintScreen key: most browsers don't even fire a keyboard event for it
+- Safari/Windows does not fire keydown events for modifier keys (shift/ctrl/alt/capslock)
 
 Patches are welcome; that's what GitHub is for.  I'm hoping to return to this and make sure it works robustly in all browsers.  The intent is for this to be completely cross-browser and independent of all external libraries.
