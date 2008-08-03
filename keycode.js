@@ -41,35 +41,40 @@ var is_gecko = navigator.userAgent.indexOf('Gecko') != -1,
     is_konqueror = navigator.vendor.indexOf('KDE') != -1,
     is_icab = navigator.vendor.indexOf('iCab') != -1;
 
+var GECKO_IE_KEYMAP = {
+    186: 59, // ;: in IE
+    187: 61, // =+ in IE
+    188: 44, // ,<
+    109: 95, // -_ in Mozilla
+    189: 95, // -_ in IE
+    190: 62, // .>
+    191: 47, // /?
+    192: 126, // `~
+    219: 91, // {[
+    220: 92, // \|
+    221: 93 // }]
+};
+
+var OPERA_KEYMAP = {
+    188: 44,    // ,<
+    190: 62,    // .>
+    191: 47,    // /?
+    192: 126,   // `~
+    219: 91,    // {[
+    220: 92,    // |\
+    221: 93     // }]
+};
+
 // Browser detection taken from quirksmode.org
 if(is_gecko || is_ie) {  
     // These two are close enough that we can use the same map for both
-    KEY_MAP = {
-        186: 59, // ;: in IE
-        187: 61, // =+ in IE
-        188: 44, // ,<
-        109: 95, // -_ in Mozilla
-        189: 95, // -_ in IE
-        190: 62, // .>
-        191: 47, // /?
-        192: 126, // `~
-        219: 91, // {[
-        220: 92, // \|
-        221: 93 // }]
-    };
+    KEY_MAP = GECKO_IE_KEYMAP;
 } else if(is_opera && is_windows) {
-    KEY_MAP = {
-        188: 44,    // ,<
-        190: 62,    // .>
-        191: 47,    // /?
-        192: 126,   // `~
-        219: 91,    // {[
-        220: 92,    // |\
-        221: 93     // }]
-    };
+    KEY_MAP = OPERA_KEYMAP;
 } else if(is_opera || is_konqueror || is_icab) {
     var unshift = [33, 64, 35, 36, 37, 94, 38, 42, 40, 41, 
-                   58, 43, 60, 95, 62, 63, 96, 124, 34];
+                   58, 43, 60, 95, 62, 63, 124, 34];
+    KEY_MAP = OPERA_KEYMAP;
     for(var i = 0; i < unshift.length; ++i) {
         KEY_MAP[unshift[i]] = shifted_symbols[unshift[i]];
     }
