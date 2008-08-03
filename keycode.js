@@ -34,11 +34,17 @@ function capitalize(str) {
     return str.substr(0,1).toUpperCase() + str.substr(1).toLowerCase(); 
 };
 
+var is_gecko = navigator.userAgent.indexOf('Gecko') != -1,
+    is_ie = navigator.userAgent.indexOf('MSIE') != -1,
+    is_windows = navigator.platform.indexOf('Win') != -1,
+    is_opera = window.opera,
+    is_konqueror = navigator.vendor.indexOf('KDE') != -1,
+    is_icab = navigator.vendor.indexOf('iCab') != -1;
+
 // Browser detection taken from quirksmode.org
-if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
-   navigator.userAgent.indexOf('MSIE') != -1) {  // Internet Explorer 
+if(is_gecko || is_ie) {  
     // These two are close enough that we can use the same map for both
-    key_map = {
+    KEY_MAP = {
         186: 59, // ;: in IE
         187: 61, // =+ in IE
         188: 44, // ,<
@@ -51,8 +57,8 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         220: 92, // \|
         221: 93 // }]
     };
-} else if(window.opera && navigator.platform.indexOf('Win') != -1) { // Windows Opera
-    key_map = {
+} else if(is_opera && is_windows) {
+    KEY_MAP = {
         188: 44,    // ,<
         190: 62,    // .>
         191: 47,    // /?
@@ -61,14 +67,17 @@ if(navigator.userAgent.indexOf('Gecko') != -1 || // Mozilla/Gecko
         220: 92,    // |\
         221: 93     // }]
     };
-} else if(window.opera ||                           // Other Opera
-          navigator.vendor.indexOf('KDE') != -1 ||  // Konqueror
-          navigator.vendor.indexOf('iCab') != -1) { // iCab
+} else if(is_opera || is_konqueror || is_icab) {
     var unshift = [33, 64, 35, 36, 37, 94, 38, 42, 40, 41, 
                    58, 43, 60, 95, 62, 63, 96, 124, 34];
     for(var i = 0; i < unshift.length; ++i) {
-        key_map[unshift[i]] = shifted_symbols[unshift[i]];
+        KEY_MAP[unshift[i]] = shifted_symbols[unshift[i]];
     }
+}
+
+if(is_konqueror) {
+    KEY_MAP[0] = 45;
+    KEY_MAP[127] = 46;
 }
 
 var key_names = {
@@ -154,7 +163,7 @@ var KeyCode = window.KeyCode = {
 
     /** Translates a keycode to its normalized value */
     translate_key_code: function(code) {
-        return key_map[code] || code;
+        return KEY_MAP[code] || code;
     },
 
     /** Translates a keyDown event to a normalized key event object.  The
