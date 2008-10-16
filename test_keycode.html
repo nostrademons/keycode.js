@@ -38,6 +38,7 @@
     var fields = ['charCode', 'keyCode', 'which', 'type', 'timeStamp', 
                   'altKey', 'ctrlKey', 'shiftKey', 'metaKey'];
     var types = ['keydown', 'keypress', 'keyup'];
+
     function show_event(type) {
         return function(e) {
             var lines = [];
@@ -48,6 +49,7 @@
             return false;
         }
     };
+
     function show_is_key_down(id, code, ctrl, alt, shift) {
         document.getElementById(id + '_down').innerHTML = KeyCode.is_down({
             code: code,
@@ -56,6 +58,7 @@
             shift: shift
         });
     };
+
     function update_key_downs() {
         show_is_key_down('x', KeyCode.key('x'), false, false, false);
         show_is_key_down('shift_x', KeyCode.key('x'), false, false, true);
@@ -66,10 +69,16 @@
     document.onkeydown = function(e) {
         e = e || window.event
         var k = KeyCode;
-        document.getElementById('keyPrintout').innerHTML = 'Current key: ' + k.hot_key(k.translate_event(e));
-        document.getElementById('codePrintout').innerHTML = 'Current code: ' + k.translate_event(e).code;
+        document.getElementById('keyPrintout').innerHTML = 
+            'Current key: ' + k.hot_key(k.translate_event(e));
+        document.getElementById('codePrintout').innerHTML = 
+            'Current code: ' + k.translate_event(e).code;
         document.getElementById('raw_keycode').innerHTML = e.which || e.keyCode;
         KeyCode.key_down(e);
+        e.preventDefault();
+        return false;
+    };
+    document.onkeypress = function(e) {
         e.preventDefault();
         return false;
     };

@@ -1,7 +1,7 @@
 (function() {
 
 var modifiers = ['ctrl', 'alt', 'shift'],
-    keymap = {},
+    KEY_MAP = {},
     shifted_symbols = {
         58: 59,     // : -> ;
         43: 61,     // = -> +
@@ -77,6 +77,7 @@ if(is_opera && is_windows) {
 if(is_konqueror) {
     KEY_MAP[0] = 45;
     KEY_MAP[127] = 46;
+    KEY_MAP[45] = 95;
 }
 
 var key_names = {
