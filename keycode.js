@@ -1,4 +1,41 @@
 (function() {
+/**
+ * Library to normalize key codes across browsers.  This works with keydown
+ * events; keypress events are not fired for all keys, and the codes are
+ * different for them.  It returns an object with the following fields:
+ * { int code, bool shift, bool alt, bool ctrl }.  The normalized keycodes
+ * obey the following rules:
+ * 
+ * For alphabetic characters, the ASCII code of the uppercase version
+ * 
+ * For codes that are identical across all browsers (this includes all
+ * modifiers, esc, delete, arrows, etc.), the common keycode
+ * 
+ * For numeric keypad keys, the value returned by numkey(). 
+ * (Usually 96 + the number)
+ * 
+ * For symbols, the ASCII code of the character that appears when shift
+ * is not held down, EXCEPT for '" => 222 (conflicts with right-arrow/pagedown),
+ * .> => 190 (conflicts with Delete) and `~ => 126 (conflicts with Num0).
+ * 
+ * Basic usage:
+ * document.onkeydown = function(e) { 
+ *    do_something_with(KeyCode.translateEvent(e) 
+ * };
+ * 
+ * The naming conventions for functions use 'code' to represent an integer
+ * keycode, 'key' to represent a key description (specified above), and 'e'
+ * to represent an event object.
+ * 
+ * There's also functionality to track and detect which keys are currently
+ * being held down: install 'key_up' and 'key_down' on their respective event
+ * handlers, and then check with 'is_down'.
+ *
+ * @fileoverview
+ * @author Jonathan Tang
+ * @version 0.9
+ * @license BSD
+ */
 
 var modifiers = ['ctrl', 'alt', 'shift'],
     KEY_MAP = {},
@@ -180,12 +217,12 @@ var KeyCode = window.KeyCode = {
         return shifted_symbols[c] || c;
     },
 
-    /** Checks if two keycode objects are equal */
+    /** Checks if two key objects are equal. */
     key_equals: function(key1, key2) {
         return key1.code == key2.code && same_modifiers(key1, key2);
     },
 
-    /** Translates a keycode to its normalized value */
+    /** Translates a keycode to its normalized value. */
     translate_key_code: function(code) {
         return KEY_MAP[code] || code;
     },
