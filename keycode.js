@@ -111,7 +111,14 @@ function fn_name(code) {
 };
 function num_name(code) {
     if(code >= 96 && code < 106) return 'Num' + (code - 96);
-    return false;
+    switch(code) {
+        case 107: return 'Num+';
+        case 109: return 'Num-';
+        case 106: return 'Num*';
+        case 111: return 'Num/';
+        case 110: return 'Num.';
+        default: return false;
+    }
 };
 
 var current_keys = {
@@ -146,10 +153,27 @@ var KeyCode = window.KeyCode = {
     /** Generates a function key code from a number between 1 and 12 */
     fkey: function(num) { return 111 + num; },
 
-    /** Generates a numeric keypad code from a number between 0 and 9 */
-    numkey: function(num) { return 96 + num; },
+    /** 
+     * Generates a numeric keypad code from a number between 0 and 9. 
+     * Also works for the arithmetic operators.  The mappings are:
+     *
+     * +: 107, -: 109, *: 106, /: 111, .: 110
+     *
+     */
+    numkey: function(num) { 
+        switch(num) {
+            case '+': return 107;
+            case '-': return 109;
+            case '*': return 106;
+            case '/': return 111;
+            case '.': return 110;
+            default: return 96 + num;
+        }
+    },
 
-    /** Generates a key code from the ASCII code of (the first character of) a string. */
+    /** Generates a key code from the ASCII code of (the first character of) a
+     * string. 
+     */
     key: function(str) { 
         var c = str.charCodeAt(0); 
         if(isLower(c)) return c - 32;
