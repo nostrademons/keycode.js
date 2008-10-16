@@ -14,10 +14,12 @@ This library works with key objects, which are { Int code, bool shift, bool alt,
 So far, I've tested it on:
 
 - Firefox 2.0.0.12 for Linux
+- Konqueror 3.5.8 for Linux
 - Firefox 2.0.0.16 for Windows
 - Firefox 3.0.3 for Windows
 - Google Chrome 0.2.149.30 for Windows
 - IE 6.0 for Windows
+- IE 7.0 for Windows
 - Opera 9.5.1 for Windows
 - Safari 3.0 for Windows
 
