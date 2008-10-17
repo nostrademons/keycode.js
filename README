@@ -29,4 +29,4 @@ Known bugs include:
 - Safari/Windows does not fire keydown events for modifier keys (shift/ctrl/alt/capslock)
 - Num- comes out as _ on Firefox, and Num+ appears as = (those are the unshifted keys of -/+, respectively).  There's no way to avoid this; the keycodes are exactly identical.  Similarly, all the keypad arithmetic keys act like their non-keypad equivalents on Konqueror/Opera 8.5, since the keycodes don't distinguish between them.
 
-Patches are welcome; that's what GitHub is for.  I'm hoping to return to this and make sure it works robustly in all browsers.  The intent is for this to be completely cross-browser and independent of all external libraries.
+Patches are welcome; that's what GitHub is for.
