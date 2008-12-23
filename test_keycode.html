@@ -75,7 +75,9 @@
             'Current code: ' + k.translate_event(e).code;
         document.getElementById('raw_keycode').innerHTML = e.which || e.keyCode;
         KeyCode.key_down(e);
-        e.preventDefault();
+        if(e.preventDefault) {
+            e.preventDefault();
+        }
         return false;
     };
     document.onkeypress = function(e) {
