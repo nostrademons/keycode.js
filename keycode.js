@@ -101,7 +101,7 @@ function capitalize(str) {
 var is_gecko = navigator.userAgent.indexOf('Gecko') != -1,
     is_ie = navigator.userAgent.indexOf('MSIE') != -1,
     is_windows = navigator.platform.indexOf('Win') != -1,
-    is_opera = window.opera && window.opera.version() < '9.5',
+    is_opera = window.opera && window.opera.version() < 9.5,
     is_konqueror = navigator.vendor && navigator.vendor.indexOf('KDE') != -1,
     is_icab = navigator.vendor && navigator.vendor.indexOf('iCab') != -1;
 
