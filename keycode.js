@@ -20,7 +20,7 @@
  * 
  * Basic usage:
  * document.onkeydown = function(e) { 
- *    do_something_with(KeyCode.translateEvent(e) 
+ *    do_something_with(KeyCode.translate_event(e) 
  * };
  * 
  * The naming conventions for functions use 'code' to represent an integer
